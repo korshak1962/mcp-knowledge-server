@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+    "mysql-server": {
+      "command": "java",
+      "args": [
+        "-Xmx512m",
+        "-jar",
+        "D:/mysql-mcp-server/target/mysql-mcp-server-0.0.1-SNAPSHOT.jar"
+      ],
+      "env": {
+        "MYSQL_HOST": "localhost",
+        "MYSQL_PORT": "3306",
+        "MYSQL_DATABASE": "alpha",
+        "MYSQL_USERNAME": "root",
+        "MYSQL_PASSWORD": "admin1234"
+      }
+    },
+    "mcp-knowledge-server": {
+      "command": "java",
+      "args": [
+        "-jar",
+        "D:\\mcp-knowledge-server\\target\\mcp-knowledge-server-1.0.0-standalone.jar"
+      ],
+      "cwd": "D:\\mcp-knowledge-server"
+    }
+  }
+}

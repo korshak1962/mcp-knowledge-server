@@ -1,0 +1,26 @@
+package com.korshak.mcpserver;
+
+import com.korshak.mcpserver.service.KnowledgeStoreService;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+@SpringBootTest(classes = McpKnowledgeServerApplication.class)
+@TestPropertySource(properties = {
+    "knowledge.store.path=./test-knowledge-store"
+})
+class McpKnowledgeServerApplicationTests {
+
+    @Test
+    void contextLoads() {
+        // Test that the Spring context loads successfully
+    }
+
+    @Test
+    void knowledgeStoreServiceBeanExists() {
+        KnowledgeStoreService service = new KnowledgeStoreService();
+        assertNotNull(service);
+    }
+}

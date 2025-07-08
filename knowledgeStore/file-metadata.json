@@ -1,0 +1,32 @@
+{
+  "budget-analysis-q1-2025.txt" : {
+    "filename" : "budget-analysis-q1-2025.txt",
+    "description" : "Q1 2025 Budget Analysis Report",
+    "tags" : [ "budget", "finance", "q1", "2025", "analysis", "report" ],
+    "category" : "finance",
+    "summary" : "Comprehensive budget analysis for Q1 2025 including revenue projections, development costs, operational expenses, and recommendations",
+    "size" : 1500,
+    "mimeType" : null,
+    "lastModified" : [ 2025, 1, 15, 10, 0 ],
+    "lastAccessed" : [ 2025, 7, 6, 12, 0 ],
+    "customProperties" : null,
+    "estimatedTokens" : 0,
+    "language" : null,
+    "largeFile" : false
+  },
+  "temp_resume.txt" : {
+    "filename" : "temp_resume.txt",
+    "description" : null,
+    "tags" : [ "txt" ],
+    "category" : "text",
+    "summary" : null,
+    "size" : 2060,
+    "mimeType" : null,
+    "lastModified" : [ 2025, 7, 7, 14, 48, 15, 727436300 ],
+    "lastAccessed" : null,
+    "customProperties" : null,
+    "estimatedTokens" : 515,
+    "language" : null,
+    "largeFile" : false
+  }
+}

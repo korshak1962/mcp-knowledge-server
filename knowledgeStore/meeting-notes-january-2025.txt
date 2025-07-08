@@ -1,0 +1,37 @@
+Meeting Notes - MCP Server Development
+======================================
+
+Date: January 2025
+Attendees: Development Team
+Topic: Knowledge Server Enhancement
+
+Key Decisions:
+- Implement metadata-enhanced file management
+- Support for EPUB and DjVu formats
+- Dual transport: WebSocket and stdin/stdout
+- Package migration to com.korshak namespace
+
+Action Items:
+1. Complete EPUB text extraction implementation
+2. Add DjVu support with external tool integration  
+3. Create comprehensive test suite
+4. Document Claude Desktop integration steps
+5. Prepare for user testing phase
+
+Technical Notes:
+- Apache Tika provides good fallback for unknown formats
+- JSoup library excellent for HTML parsing in EPUB files
+- DjVuLibre tools required for optimal DjVu text extraction
+- Spring Boot 3.x requires Jakarta annotations (not javax)
+
+Next Steps:
+- Deploy to test environment
+- Conduct Claude Desktop integration testing
+- Gather user feedback on file format support
+- Plan additional format support (CBR/CBZ comics?)
+
+Issues Resolved:
+- Fixed Spring Boot configuration conflicts
+- Resolved PDFBox version compatibility 
+- Completed package namespace migration
+- Added proper error handling for missing tools

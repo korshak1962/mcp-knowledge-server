@@ -1,0 +1,29 @@
+MCP Knowledge Server Setup Instructions
+
+1. BUILDING THE PROJECT
+   Run the following command in the project root directory:
+   mvn clean install
+
+2. RUNNING THE SERVER
+   Run the following command:
+   mvn spring-boot:run
+   
+   Or after building, run:
+   java -jar target/mcp-knowledge-server-1.0.0.jar
+
+3. TESTING THE SERVER
+   - Health check: GET http://localhost:8080/api/knowledge/health
+   - List files: GET http://localhost:8080/api/knowledge/files
+   - WebSocket MCP endpoint: ws://localhost:8080/mcp
+
+4. UPLOADING FILES
+   Use the upload endpoint: POST http://localhost:8080/api/knowledge/upload
+   
+5. MCP TOOLS AVAILABLE
+   - list_files: List all files in knowledge store
+   - read_file: Read content of a specific file
+   - search_files: Search for files containing text
+   - get_file_info: Get file metadata
+   - write_file: Write content to a file
+
+The server supports text files, PDFs, images, and many other formats through Apache Tika.

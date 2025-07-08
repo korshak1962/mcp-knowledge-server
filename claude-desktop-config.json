@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "mcp-knowledge-server": {
+      "command": "java",
+      "args": [
+        "-cp", 
+        "D:\\mcp-knowledge-server\\target\\mcp-knowledge-server-1.0.0.jar",
+        "com.korshak.mcpserver.McpStdinServerApplication",
+        "--spring.profiles.active=stdin"
+      ],
+      "cwd": "D:\\mcp-knowledge-server"
+    }
+  }
+}

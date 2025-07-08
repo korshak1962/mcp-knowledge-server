@@ -1,0 +1,33 @@
+Based on the provided .docx file content which appears to be encoded/compressed Word format, I need to extract text manually from the document structure. 
+
+Let me read the requirements and create a tailored resume based on your base resume content and the job requirements:
+
+Job Requirements Summary:
+- Client: Automation Company (Warehouse orchestration and store inventory management software)
+- Role: Principal Architect
+- Location: Redwood City, CA
+- Type: Full time Direct hire
+
+Key Requirements:
+- Algorithmic-heavy and computationally intensive systems experience is essential
+- Proficiency in Java / C++
+- Strong understanding of distributed systems and expertise in low-latency queuing systems
+- Experience with major architecture patterns
+- Well-versed in performance and scalability concepts
+- Ability to create clear and concise design documents
+- Over 12 years of experience in the software industry, including at least 1 year as a Principal Architect
+- Bachelor's or Master's degree in Computer Science, Software Engineering, or related field
+
+Key Responsibilities:
+- Enhance, re-architect, or develop new algorithms to improve functional performance
+- Drive product innovation, define the technology roadmap, and provide long-term vision for module teams
+- Create high-level system design documents for cross-functional microservices
+- Conduct simulations to achieve breakthrough functional and technical performance
+- Innovate and identify patentable solutions for product and technical requirements
+- Integrate necessary certification and compliance requirements into product designs
+- Serve as a central technology point for critical product, engineering, and related teams
+- Contribute to strategic planning for the product vision and roadmap
+- Play a pivotal role in the company's transition to a full SaaS/PaaS product
+- Lead Proof of Concepts (PoCs) for new technologies
+
+Since the docx content is encoded, I'll proceed with creating a tailored version based on the emphasis you mentioned about Google datacenter logistic tool experience.
