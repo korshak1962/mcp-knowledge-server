@@ -78,9 +78,12 @@ public class McpStdinServerApplication {
                         // Process the MCP message
                         String response = protocolHandler.handleMessage(line);
                         
-                        // Write response to stdout
-                        System.out.println(response);
-                        System.out.flush();
+                        // Only write response to stdout if there is one
+                        // (notifications don't require responses)
+                        if (response != null) {
+                            System.out.println(response);
+                            System.out.flush();
+                        }
                         
                     } catch (Exception e) {
                         logger.error("Error processing message: " + line, e);
@@ -106,12 +109,12 @@ public class McpStdinServerApplication {
                 
                 Map<String, Object> response = new HashMap<>();
                 response.put("jsonrpc", "2.0");
-                response.put("id", null);
+                response.put("id", "0"); // Use default ID for error responses
                 response.put("error", error);
                 
                 return objectMapper.writeValueAsString(response);
             } catch (Exception e) {
-                return "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32603,\"message\":\"Internal error\"}}";
+                return "{\"jsonrpc\":\"2.0\",\"id\":\"0\",\"error\":{\"code\":-32603,\"message\":\"Internal error\"}}";
             }
         }
     }

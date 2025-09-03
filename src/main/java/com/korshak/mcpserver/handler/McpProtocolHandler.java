@@ -49,6 +49,12 @@ public class McpProtocolHandler {
                 return createErrorResponse(requestId, -32600, "Invalid Request: missing method");
             }
             
+            // Handle notifications (no response required)
+            if (method.equals("notifications/initialized")) {
+                logger.info("Received initialization notification");
+                return null; // No response for notifications
+            }
+            
             // Extract params
             JsonNode paramsNode = requestNode.get("params");
             Map<String, Object> params = new HashMap<>();
@@ -76,6 +82,10 @@ public class McpProtocolHandler {
                 return handleToolsList();
             case "tools/call":
                 return handleToolsCall(params);
+            case "prompts/list":
+                return handlePromptsList();
+            case "resources/list":
+                return handleResourcesList();
             default:
                 throw new RuntimeException("Method not found: " + method);
         }
@@ -91,11 +101,33 @@ public class McpProtocolHandler {
         result.put("serverInfo", serverInfo);
         
         Map<String, Object> capabilities = new HashMap<>();
+        
+        // Indicate that this server supports tools
         Map<String, Object> tools = new HashMap<>();
         capabilities.put("tools", tools);
+        
+        // Add empty capabilities for prompts and resources (required by MCP spec)
+        Map<String, Object> prompts = new HashMap<>();
+        capabilities.put("prompts", prompts);
+        
+        Map<String, Object> resources = new HashMap<>();
+        capabilities.put("resources", resources);
+        
         result.put("capabilities", capabilities);
         
         return result;
+    }
+    
+    private Map<String, Object> handlePromptsList() {
+        // Return empty prompts list - this server doesn't provide prompts
+        List<Map<String, Object>> prompts = new ArrayList<>();
+        return Map.of("prompts", prompts);
+    }
+    
+    private Map<String, Object> handleResourcesList() {
+        // Return empty resources list - this server doesn't provide resources
+        List<Map<String, Object>> resources = new ArrayList<>();
+        return Map.of("resources", resources);
     }
     
     private Map<String, Object> handleToolsList() {
