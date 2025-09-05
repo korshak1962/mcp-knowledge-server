@@ -1,6 +1,6 @@
 package com.korshak.mcpserver.handler;
 
-import com.korshak.mcpserver.model.*;
+import com.korshak.mcpserver.model.FileMetadata;
 import com.korshak.mcpserver.service.KnowledgeStoreService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -19,7 +19,7 @@ public class McpProtocolHandler {
     
     @Autowired
     private KnowledgeStoreService knowledgeStoreService;
-    
+
     private final ObjectMapper objectMapper = new ObjectMapper();
     
     public String handleMessage(String message) {
@@ -197,6 +197,56 @@ public class McpProtocolHandler {
                 ),
                 "required", List.of("filename", "content"))));
         
+        tools.add(createTool("get_all_definitions", 
+            "Extract all definitions from all files in the knowledge store and return them as a structured map", 
+            Map.of("type", "object", "properties", Map.of(), "required", List.of())));
+        
+        // Trading Strategy Tools
+        tools.add(createTool("get_trading_strategies", 
+            "Get all trading strategies from MongoDB database", 
+            Map.of("type", "object", "properties", Map.of(), "required", List.of())));
+        
+        tools.add(createTool("get_trading_strategy", 
+            "Get a specific trading strategy by name or ID", 
+            Map.of("type", "object", 
+                "properties", Map.of("strategy_name", Map.of("type", "string", "description", "Name or ID of the strategy")),
+                "required", List.of("strategy_name"))));
+        
+        tools.add(createTool("search_trading_strategies", 
+            "Search trading strategies by text query", 
+            Map.of("type", "object", 
+                "properties", Map.of("query", Map.of("type", "string", "description", "Search query")),
+                "required", List.of("query"))));
+        
+        tools.add(createTool("get_strategies_by_category", 
+            "Get trading strategies by category (scalping, swing, position, risk_management, technical, fundamental)", 
+            Map.of("type", "object", 
+                "properties", Map.of("category", Map.of("type", "string", "description", "Strategy category")),
+                "required", List.of("category"))));
+        
+        tools.add(createTool("get_strategies_by_risk", 
+            "Get trading strategies by risk level (low, medium, high)", 
+            Map.of("type", "object", 
+                "properties", Map.of("risk_level", Map.of("type", "string", "description", "Risk level")),
+                "required", List.of("risk_level"))));
+        
+        tools.add(createTool("get_strategies_by_indicator", 
+            "Get trading strategies that use a specific indicator", 
+            Map.of("type", "object", 
+                "properties", Map.of("indicator", Map.of("type", "string", "description", "Technical indicator name")),
+                "required", List.of("indicator"))));
+        
+        tools.add(createTool("get_trading_strategies_stats", 
+            "Get statistics about trading strategies in the database", 
+            Map.of("type", "object", "properties", Map.of(), "required", List.of())));
+        
+        // Add Strategy Extraction Tool
+        tools.add(createTool("extract_strategy", 
+            "Extract a trading strategy by scanning a file and generating a JSON strategy based on the schema", 
+            Map.of("type", "object", 
+                "properties", Map.of("fileName", Map.of("type", "string", "description", "Name of the file to scan for strategy information")),
+                "required", List.of("fileName"))));
+        
         return Map.of("tools", tools);
     }
     
@@ -341,6 +391,34 @@ public class McpProtocolHandler {
                         return "Error: filename and content parameters are required";
                     }
                     return knowledgeStoreService.writeFile(writeFilename, content);
+                    
+                case "get_all_definitions":
+                    Map<String, String> definitions = knowledgeStoreService.getAllDefinitions();
+                    if (definitions.isEmpty()) {
+                        return "No definitions found in the knowledge store.";
+                    } else {
+                        StringBuilder sb = new StringBuilder();
+                        sb.append("📚 All Definitions Found in Knowledge Store\n");
+                        sb.append("═══════════════════════════════════════════\n\n");
+                        
+                        // Sort definitions alphabetically
+                        definitions.entrySet().stream()
+                            .sorted(Map.Entry.comparingByKey())
+                            .forEach(entry -> {
+                                sb.append("📖 **").append(entry.getKey()).append("**\n");
+                                sb.append("   ").append(entry.getValue()).append("\n\n");
+                            });
+                        
+                        sb.append("\n📊 Total definitions found: ").append(definitions.size());
+                        return sb.toString();
+                    }
+                    
+                case "extract_strategy":
+                    String strategyFileName = (String) arguments.get("fileName");
+                    if (strategyFileName == null) {
+                        return "Error: fileName parameter is required";
+                    }
+                    return knowledgeStoreService.extractStrategy(strategyFileName);
                     
                 default:
                     return "Unknown tool: " + toolName;

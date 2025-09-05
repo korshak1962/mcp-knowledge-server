@@ -81,6 +81,12 @@
             <version>2.15.1</version>
         </dependency>
 
+        <!-- MongoDB for trading strategies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>

@@ -132,6 +132,18 @@ public class KnowledgeStoreController {
         return ResponseEntity.ok(result);
     }
     
+    @GetMapping("/definitions")
+    public ResponseEntity<Map<String, String>> getAllDefinitions() {
+        Map<String, String> definitions = knowledgeStoreService.getAllDefinitions();
+        return ResponseEntity.ok(definitions);
+    }
+    
+    @PostMapping("/strategy/extract")
+    public ResponseEntity<String> extractStrategy(@RequestParam String fileName) {
+        String result = knowledgeStoreService.extractStrategy(fileName);
+        return ResponseEntity.ok(result);
+    }
+    
     // Request DTO for metadata updates
     public static class UpdateMetadataRequest {
         private String description;
